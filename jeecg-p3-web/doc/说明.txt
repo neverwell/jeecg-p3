@@ -1,0 +1,10 @@
+﻿开发环境入门步骤：
+ 第一步：创建Mysql数据库jeecg-p3(UTF-8编码)
+       {插件项目}/doc/sql/{插件项目脚本}.sql
+ 第二步：采用maven方式启动项目 (jeecg-p3-web)
+             项目右建->debug as->debug configurations->选中jeecg-p3-web项目->输入命令：tomcat:run
+	     或者maven install得到war包 在自己服务器中运行
+	  或者只用eclipseee的servers中的tomcat运行
+ 第三步：访问项目地址
+      http://localhost:8080/jeecg-p3-web/cms/index.do
+  
