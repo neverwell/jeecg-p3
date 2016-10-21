@@ -11,4 +11,42 @@
 
 
 api接口如有更新，在git拉取最新程序后，在jeecg-p3-cms项目运行maven install 会在maven本地仓库中生成最新jeecg-p3-cms.jar包
-  
+
+接口：
+
+编码关系api：
+
+获得编码关系列表
+GET http://localhost:8080/jeecg-p3-web/api/erpCode/list/{pageNo}/{pageSize}
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/list/1/10
+return：{"summary":"","status":true,"data":{"results":[{"oneCode":"121","id":2,"code":"21"},{"oneCode":"121","id":3,"code":"21"},{"oneCode":"121","id":4,"code":"21"},{"oneCode":"121","id":5,"code":"21"},{"oneCode":"121","id":6,"code":"21"},{"oneCode":"121","id":7,"code":"21"},{"oneCode":"121","id":8,"code":"21"},{"oneCode":"121","id":9,"code":"21"}],"pages":1,"total":8,"rows":10,"page":1}}
+
+根据id查询
+GET http://localhost:8080/jeecg-p3-web/api/erpCode/detail/{id}
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/detail/3
+return：{"summary":"","status":true,"data":{"oneCode":"121","id":3,"code":"21"}}
+
+根据code查询
+GET http://localhost:8080/jeecg-p3-web/api/erpCode/code/{code}
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/code/adfadfadfa
+return：{"summary":"","status":true,"data":{"results":[{"oneCode":"121","id":2,"code":"adfadfadfa"}],"pages":1,"total":1,"rows":100,"page":1}}
+
+根据oneCode查询
+GET http://localhost:8080/jeecg-p3-web/api/erpCode/oneCode/{oneCode}
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/oneCode/2421312321
+return：{"summary":"","status":true,"data":{"results":[{"oneCode":"2421312321","id":2,"code":"adfadfadfa"}],"pages":1,"total":1,"rows":100,"page":1
+
+添加
+POST http://localhost:8080/jeecg-p3-web/api/erpCode/add
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/add [{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"}]
+return: {"summary":"添加成功","status":true,"data":null}
+
+编辑
+POST http://localhost:8080/jeecg-p3-web/api/erpCode/edit
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/edit {"id":3,"oneCode":"121","code":"21"}
+return: {"summary":"编辑成功","status":true,"data":null}
+
+删除 
+GET http://localhost:8080/jeecg-p3-web/api/erpCode/delete/{id}
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/delete/3
+return：{"summary":"删除成功","status":true,"data":null}
