@@ -32,7 +32,7 @@ GET http://localhost:8080/jeecg-p3-web/api/erpCode/code/{code}
 例：http://localhost:8080/jeecg-p3-web/api/erpCode/code/adfadfadfa
 return：{"summary":"","status":true,"data":{"results":[{"oneCode":"121","id":2,"code":"adfadfadfa"}],"pages":1,"total":1,"rows":100,"page":1}}
 
-根据oneCode查询
+根据oneCode一维码查询
 GET http://localhost:8080/jeecg-p3-web/api/erpCode/oneCode/{oneCode}
 例：http://localhost:8080/jeecg-p3-web/api/erpCode/oneCode/2421312321
 return：{"summary":"","status":true,"data":{"results":[{"oneCode":"2421312321","id":2,"code":"adfadfadfa"}],"pages":1,"total":1,"rows":100,"page":1
@@ -51,3 +51,9 @@ return: {"summary":"编辑成功","status":true,"data":null}
 GET http://localhost:8080/jeecg-p3-web/api/erpCode/delete/{id}
 例：http://localhost:8080/jeecg-p3-web/api/erpCode/delete/3
 return：{"summary":"删除成功","status":true,"data":null}
+
+
+产品类型api：
+GET http://localhost:8080/jeecg-p3-web/api/erpCategory/tree
+例：http://localhost:8080/jeecg-p3-web/api/erpCategory/tree
+return：{"summary":"","status":true,"data":[{"parentCode":null,"name":"电子产品","id":"A01"},{"parentCode":"A01","name":"计算器","id":"A01A01"},{"parentCode":null,"name":"电子器材","id":"A02"},{"parentCode":"A02","name":"硬盘","id":"A02A01"}]}

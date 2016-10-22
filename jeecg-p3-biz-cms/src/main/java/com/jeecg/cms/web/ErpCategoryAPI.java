@@ -29,14 +29,6 @@ public class ErpCategoryAPI extends BaseController {
 
 	private Map<String, Object> result = new HashMap();
 
-	@RequestMapping(params = "treeApi",headers="Accept=application/json")
-	@ResponseBody
-	public List<ErpCategory> treeApi() {
-		MiniDaoPage<ErpCategory> list = erpCategoryDao.getTree();
-		List<ErpCategory> erpCategoryList = list.getResults();
-		return erpCategoryList;
-	}
-	
 	
 	
 	/**
