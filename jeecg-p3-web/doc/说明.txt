@@ -57,3 +57,29 @@ return：{"summary":"删除成功","status":true,"data":null}
 GET http://localhost:8080/jeecg-p3-web/api/erpCategory/tree
 例：http://localhost:8080/jeecg-p3-web/api/erpCategory/tree
 return：{"summary":"","status":true,"data":[{"parentCode":null,"name":"电子产品","id":"A01"},{"parentCode":"A01","name":"计算器","id":"A01A01"},{"parentCode":null,"name":"电子器材","id":"A02"},{"parentCode":"A02","name":"硬盘","id":"A02A01"}]}
+
+
+
+产品api:
+获得产品列表
+GET http://localhost:8080/jeecg-p3-web/api/erpProduct/list/{pageNo}/{pageSize}
+例：http://localhost:8080/jeecg-p3-web/api/erpProduct/list/1/10
+{"summary":"","status":true,"data":{"results":[{"oneCode":null,"columnId":"A01","brand":"lining","inDate":1476717339000,"name":"name2","location":"R2","id":"erqrecrrqr","model":"50","code":"211"},{"oneCode":null,"columnId":"A01","brand":"nike","inDate":1477322057000,"name":"name1","location":"R1","id":"fafafdafdaf","model":"100","code":"21"}],"pages":1,"total":2,"rows":10,"page":1}}
+
+根据oneCode一维码查询
+GET http://localhost:8080/jeecg-p3-web/api/erpProduct/oneCode/{oneCode}
+例：http://localhost:8080/jeecg-p3-web/api/erpProduct/oneCode/1210
+return：{"summary":"","status":true,"data":{"oneCode":null,"columnId":"A01","brand":"nike","inDate":1477322057000,"name":"name1","location":"R1","id":"fafafdafdaf","model":"100","code":"21"}}
+例：http://localhost:8080/jeecg-p3-web/api/erpProduct/oneCode/12101111
+return：{"summary":"此一维码尚未入库","status":false,"data":null}
+
+入库
+POST http://localhost:8080/jeecg-p3-web/api/erpProduct/in
+例：http://localhost:8080/jeecg-p3-web/api/erpProduct/in {"oneCode":"1219","columnId":"A01","brand":"lining","name":"name2","location":"R2","id":"erqrecrrqr","model":"50","code":"219"}
+return: {"summary":"入库成功","status":true,"data":null}
+
+
+出库
+POST http://localhost:8080/jeecg-p3-web/api/erpProduct/out
+例：http://localhost:8080/jeecg-p3-web/api/erpProduct/out{{"oneCode":"1211","columnId":"A01","brand":"lining","inDate":1476717339000,"name":"name2","location":"R2","id":"erqrecrrqr","model":"50","code":"211"}
+{"summary":"出库成功","status":true,"data":null}

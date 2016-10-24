@@ -1,6 +1,7 @@
 package com.jeecg.cms.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ErpProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,31 @@ public class ErpProduct implements Serializable {
 	 * CODE
 	 */
 	private String code;
+
+	/**
+	 * ONECODE
+	 */
+	private String oneCode;
+
+	/**
+	 * LOCATION
+	 */
+	private String location;
+
+	/**
+	 * IN_DATE
+	 */
+	private Date inDate;
+
+	/**
+	 * BRAND
+	 */
+	private String brand;
+
+	/**
+	 * MODEL
+	 */
+	private String model;
 
 	public String getId() {
 		return id;
@@ -53,6 +79,46 @@ public class ErpProduct implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Date getInDate() {
+		return inDate;
+	}
+
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getOneCode() {
+		return oneCode;
+	}
+
+	public void setOneCode(String oneCode) {
+		this.oneCode = oneCode;
 	}
 
 }

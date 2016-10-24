@@ -7,6 +7,7 @@ import org.jeecgframework.minidao.pojo.MiniDaoPage;
 import org.springframework.stereotype.Repository;
 
 import com.jeecg.cms.entity.CmsArticle;
+import com.jeecg.cms.entity.ErpCode;
 import com.jeecg.cms.entity.ErpProduct;
 
 @Repository
@@ -61,5 +62,14 @@ public interface ErpProductDao extends CmsDao {
 	public void delete(@Param("erpProduct") ErpProduct erpProduct);
 
 	public void deleteByCode(@Param("code") String code);
+
+	/**
+	 * 查询返回Java对象
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@Sql("SELECT * FROM erp_product WHERE CODE = :code")
+	ErpProduct getByCode(@Param("code") String code);
 
 }

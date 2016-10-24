@@ -9,4 +9,16 @@ SET
 	   <#if erpProduct.code ?exists>
 		   CODE = :erpProduct.code,
 		</#if>
+		<#if erpProduct.code ?exists>
+		   LOCATION = :erpProduct.location,
+		</#if>
+		<#if erpProduct.code ?exists>
+		   IN_DATE = :erpProduct.inDate,
+		</#if>
+		<#if erpProduct.code ?exists>
+		   BRAND = :erpProduct.brand,
+		</#if>
+		<#if erpProduct.code ?exists>
+		   MODEL = :erpProduct.model,
+		</#if>
 WHERE ID = :erpProduct.id

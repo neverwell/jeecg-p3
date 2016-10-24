@@ -1,6 +1,7 @@
 package com.jeecg.cms.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -127,6 +128,7 @@ public class ErpProductController extends BaseController {
 		try {
 			String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 			erpProduct.setId(randomSeed);
+			erpProduct.setInDate(new Date());
 			erpProductDao.insert(erpProduct);
 			j.setMsg("保存成功");
 		} catch (Exception e) {
@@ -149,13 +151,14 @@ public class ErpProductController extends BaseController {
 		 * 添加的时候需要添加产品列表数据信息
 		 */
 		List<ErpProduct> erpProducts = new ArrayList<ErpProduct>();
-
+		Date now = new Date();
 		for (int i = 0; i < 10; i++) {
 			ErpProduct ep = new ErpProduct();
 			String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 			ep.setId(randomSeed);
 			ep.setCode(randomSeed);
 			ep.setColumnId(columnId);
+			ep.setInDate(now);
 			erpProducts.add(ep);
 		}
 
@@ -227,6 +230,7 @@ public class ErpProductController extends BaseController {
 				ep.setName(randomSeed);
 				ep.setCode(epcId);
 				ep.setColumnId(columnId);
+				ep.setInDate(new Date());
 				erpProducts.add(ep);
 			}
 			for (ErpProduct p : erpProducts) {
