@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2016-10-21 15:25:03
+Date: 2016-10-25 08:24:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -163,19 +163,21 @@ CREATE TABLE `erp_code` (
   `CODE` varchar(255) DEFAULT NULL COMMENT '产品编号',
   `ONECODE` varchar(255) DEFAULT NULL COMMENT '产品一维码编号',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of erp_code
 -- ----------------------------
-INSERT INTO `erp_code` VALUES ('2', '21', '121');
-INSERT INTO `erp_code` VALUES ('3', '21', '121');
-INSERT INTO `erp_code` VALUES ('4', '21', '121');
-INSERT INTO `erp_code` VALUES ('5', '21', '121');
-INSERT INTO `erp_code` VALUES ('6', '21', '121');
-INSERT INTO `erp_code` VALUES ('7', '21', '121');
-INSERT INTO `erp_code` VALUES ('8', '21', '121');
-INSERT INTO `erp_code` VALUES ('9', '21', '121');
+INSERT INTO `erp_code` VALUES ('2', 'adfadfadfa', '2421312321');
+INSERT INTO `erp_code` VALUES ('3', '21', '1210');
+INSERT INTO `erp_code` VALUES ('6', '212', '1212');
+INSERT INTO `erp_code` VALUES ('7', '213', '1213');
+INSERT INTO `erp_code` VALUES ('8', '214', '1214');
+INSERT INTO `erp_code` VALUES ('9', '215', '1215');
+INSERT INTO `erp_code` VALUES ('10', '216', '1216');
+INSERT INTO `erp_code` VALUES ('11', '217', '1217');
+INSERT INTO `erp_code` VALUES ('12', '218', '1218');
+INSERT INTO `erp_code` VALUES ('14', '2110', '12110');
 
 -- ----------------------------
 -- Table structure for `erp_product`
@@ -187,9 +189,14 @@ CREATE TABLE `erp_product` (
   `NAME` varchar(255) DEFAULT NULL COMMENT '产品名称',
   `COLUMN_ID` varchar(255) DEFAULT NULL COMMENT '类型ID',
   `LOCATION` varchar(255) DEFAULT NULL COMMENT '货架位置',
+  `IN_DATE` datetime DEFAULT NULL COMMENT '入库时间',
+  `BRAND` varchar(255) DEFAULT NULL COMMENT '品牌',
+  `MODEL` varchar(255) DEFAULT NULL COMMENT '产品型号',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of erp_product
 -- ----------------------------
+INSERT INTO `erp_product` VALUES ('E09D17C2D24D4C7DAC551F7F7D658F79', '219', 'name2', 'A01', 'R2', null, 'lining', '50');
+INSERT INTO `erp_product` VALUES ('fafafdafdaf', '21', 'name1', 'A01', 'R1', '2016-10-24 23:14:17', 'nike', '100');
