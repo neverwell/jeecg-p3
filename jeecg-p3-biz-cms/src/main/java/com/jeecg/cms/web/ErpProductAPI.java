@@ -157,6 +157,7 @@ public class ErpProductAPI extends BaseController {
 		} else {
 			String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 			erpProduct.setId(randomSeed);
+			erpProduct.setCode(erpCode.getCode());
 			erpProductDao.insert(erpProduct);
 			result.put("status", true);
 			result.put("summary", "入库成功");
