@@ -95,7 +95,7 @@ public class ErpCodeController extends BaseController {
 			erpCodeDao.insert(erpCode);
 			j.setMsg("保存成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("保存失败");
 		}
@@ -130,7 +130,7 @@ public class ErpCodeController extends BaseController {
 			erpCodeDao.update(erpCode);
 			j.setMsg("编辑成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("编辑失败");
 		}
@@ -152,7 +152,7 @@ public class ErpCodeController extends BaseController {
 			erpCodeDao.delete(erpCode);
 			j.setMsg("删除成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("删除失败");
 		}

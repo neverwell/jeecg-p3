@@ -24,6 +24,8 @@
 										<input type="text" name="columnId" id="columnId" value="$!{erpProduct.columnId}" class="form-control" />
 									</div>
 								</div>
+								
+								
 								<button type="submit" class="btn btn-primary">搜  索</button>
 								<div class="clearfix"></div>
 							</div>
@@ -39,6 +41,10 @@
                                     <th>产品名称</th>
                                     <th>产品编码</th>
                                     <th>产品类别</th>
+                                    <th>产品规格</th>
+                                    <th>产品品牌</th>
+                                    <th>货架位置</th>
+                                    <th>入库时间</th>
                                     <th>操作</th>
 								</thead>
 								<tbody>
@@ -48,9 +54,13 @@
                                                 <td>$!{info.name}</td>
                                                 <td>$!{info.code}</td>
                                                 <td class="$!{info.columnId}">$!{info.columnId}</td>
+                                                <td>$!{info.model}</td>
+                                                <td>$!{info.brand}</td>
+                                                <td>$!{info.location}</td>
+                                                <td>$!dateTool.format("yyyy-MM-dd",$!{info.inDate})</td>
                                                 <td class="last">
-													<a href="javascript:doUrl('$!{basePath}/p3/cms/erpProduct.do?toEdit&id=$!{info.id}')" >编辑</a>
-													<a href="javascript:delData('$!{basePath}/p3/cms/erpProduct.do?doDelete&id=$!{info.id}')">删除</a>
+													<!--<a href="javascript:doUrl('$!{basePath}/p3/cms/erpProduct.do?toEdit&id=$!{info.id}')" >编辑</a>
+													<a href="javascript:delData('$!{basePath}/p3/cms/erpProduct.do?doDelete&id=$!{info.id}')">删除</a>-->
 													<a href="javascript:doUrl('$!{basePath}/p3/cms/erpProduct.do?toDetail&id=$!{info.id}')">详情</a>
 												</td>
 											</tr>

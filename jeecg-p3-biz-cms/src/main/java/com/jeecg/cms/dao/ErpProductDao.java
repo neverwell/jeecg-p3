@@ -58,7 +58,7 @@ public interface ErpProductDao extends CmsDao {
 	@ResultType(String.class)
 	public String getCount(@Param("coulmnId") String coulmnId);
 
-	@Sql("DELETE from erp_product WHERE ID = :erp_product.id")
+	@Sql("DELETE from erp_product WHERE ID = :erpProduct.id")
 	public void delete(@Param("erpProduct") ErpProduct erpProduct);
 
 	public void deleteByCode(@Param("code") String code);

@@ -275,6 +275,8 @@ public class Reader18 {
 		String path = Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20", " ");
 		File f = new File(path + "config.properties");
 
+		System.out.println(f.getPath());
+
 		FileInputStream in = new FileInputStream(f);
 		pro.load(in);
 		in.close();

@@ -106,7 +106,7 @@ public class ErpCategoryController extends BaseController {
 			erpCategoryDao.insert(erpCategory);
 			j.setMsg("保存成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("保存失败");
 		}
@@ -141,7 +141,7 @@ public class ErpCategoryController extends BaseController {
 			erpCategoryDao.update(erpCategory);
 			j.setMsg("编辑成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("编辑失败");
 		}
@@ -163,7 +163,7 @@ public class ErpCategoryController extends BaseController {
 			erpCategoryDao.delete(erpCategory);
 			j.setMsg("删除成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("删除失败");
 		}

@@ -19,6 +19,9 @@
 							<div class="col-sm-8">
 								<input type="hidden" id="columnId" name="columnId" value="$!{columnId}" />
 								<input type="hidden" id="antenna" name="antenna" value="$!{antenna}" />
+								<input type="hidden" id="location" name="location" value="$!{location}" />
+								<input type="hidden" id="brand" name="brand" value="$!{brand}" />
+								<input type="hidden" id="model" name="model" value="$!{model}" />
 								<span>$!{status}</span>
 							</div>
 						</div>
@@ -50,7 +53,11 @@
 	function toInStop() {
 		var antenna=jQuery("#antenna").val();
 		var columnId=jQuery("#columnId").val();
-		doUrl('$!{basePath}/p3/cms/erpProduct.do?toInStop&antenna='+antenna+'&columnId='+columnId);
+		var location=jQuery("#location").val();
+		var brand=jQuery("#brand").val();
+		var model=jQuery("#model").val();
+		var name=jQuery("#name").val();
+		doUrl('$!{basePath}/p3/cms/erpProduct.do?toInStop&antenna='+antenna+'&columnId='+columnId+'&location='+location+'&brand='+brand+'&model='+model+'&name='+name);
     }
 </script>
 

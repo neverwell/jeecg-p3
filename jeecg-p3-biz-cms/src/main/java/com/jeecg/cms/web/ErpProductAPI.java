@@ -136,7 +136,6 @@ public class ErpProductAPI extends BaseController {
 				result.put("summary", "");
 				result.put("data", erpProduct);
 			}
-
 		}
 		return result;
 	}

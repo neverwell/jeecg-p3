@@ -8,7 +8,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.apache.velocity.VelocityContext;
+import org.jeecgframework.minidao.aop.MiniDaoHandler;
 import org.jeecgframework.minidao.pojo.MiniDaoPage;
 import org.jeecgframework.p3.core.common.utils.AjaxJson;
 import org.jeecgframework.p3.core.page.SystemTools;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jeecg.cms.dao.ErpCodeDao;
 import com.jeecg.cms.dao.ErpProductDao;
+import com.jeecg.cms.entity.ErpCode;
 import com.jeecg.cms.entity.ErpProduct;
 import com.jeecg.cms.util.Reader18;
 
@@ -31,6 +35,9 @@ import com.jeecg.cms.util.Reader18;
 public class ErpProductController extends BaseController {
 	@Autowired
 	private ErpProductDao erpProductDao;
+	@Autowired
+	private ErpCodeDao erpCodeDao;
+
 
 	/**
 	 * 列表页面
@@ -40,7 +47,7 @@ public class ErpProductController extends BaseController {
 	@RequestMapping(params = "list", method = { RequestMethod.GET, RequestMethod.POST })
 	public void list(@ModelAttribute ErpProduct query, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = false, value = "pageNo", defaultValue = "1") int pageNo,
-			@RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize) throws Exception {
+			@RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize)  {
 		try {
 			LOG.info(request, " back list");
 			// 分页数据
@@ -62,14 +69,10 @@ public class ErpProductController extends BaseController {
 	 */
 	@RequestMapping(params = "inout", method = { RequestMethod.GET, RequestMethod.POST })
 	public void in(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		try {
-			LOG.info(request, " inout page");
-			VelocityContext velocityContext = new VelocityContext();
-			String viewName = "cms/erpProduct-in.vm";
-			ViewVelocity.view(request, response, viewName, velocityContext);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		LOG.info(request, " inout page");
+		VelocityContext velocityContext = new VelocityContext();
+		String viewName = "cms/erpProduct-in.vm";
+		ViewVelocity.view(request, response, viewName, velocityContext);
 	}
 
 	/**
@@ -79,14 +82,10 @@ public class ErpProductController extends BaseController {
 	 */
 	@RequestMapping(params = "out", method = { RequestMethod.GET, RequestMethod.POST })
 	public void out(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		try {
-			LOG.info(request, " out page");
-			VelocityContext velocityContext = new VelocityContext();
-			String viewName = "cms/erpProduct-out.vm";
-			ViewVelocity.view(request, response, viewName, velocityContext);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		LOG.info(request, " out page");
+		VelocityContext velocityContext = new VelocityContext();
+		String viewName = "cms/erpProduct-out.vm";
+		ViewVelocity.view(request, response, viewName, velocityContext);
 	}
 
 	/**
@@ -132,7 +131,7 @@ public class ErpProductController extends BaseController {
 			erpProductDao.insert(erpProduct);
 			j.setMsg("保存成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("保存失败");
 		}
@@ -172,7 +171,7 @@ public class ErpProductController extends BaseController {
 			}
 			j.setMsg("批量保存成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("批量保存失败");
 		}
@@ -189,16 +188,24 @@ public class ErpProductController extends BaseController {
 	@ResponseBody
 	public void toInStart(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = true, value = "antenna") String antenna,
-			@RequestParam(required = true, value = "columnId") String columnId) throws Exception {
+			@RequestParam(required = true, value = "columnId") String columnId,
+			@RequestParam(required = false, value = "location") String location,
+			@RequestParam(required = false, value = "model") String model,
+			@RequestParam(required = false, value = "brand") String brand,
+			@RequestParam(required = false, value = "name") String name) throws Exception {
 		VelocityContext velocityContext = new VelocityContext();
 		String viewName = "cms/erpProduct-inStart.vm";
 		velocityContext.put("antenna", antenna);
 		velocityContext.put("columnId", columnId);
+		velocityContext.put("location", location);
+		velocityContext.put("model", model);
+		velocityContext.put("brand", brand);
+		velocityContext.put("name", name);
 		try {
 			Reader18.funcStart(antenna);
 			velocityContext.put("status", antenna + "正在扫描");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			velocityContext.put("status", antenna + "启动扫描异常");
 		}
 		ViewVelocity.view(request, response, viewName, velocityContext);
@@ -214,7 +221,11 @@ public class ErpProductController extends BaseController {
 	@ResponseBody
 	public void toInStop(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = true, value = "antenna") String antenna,
-			@RequestParam(required = true, value = "columnId") String columnId) throws Exception {
+			@RequestParam(required = true, value = "columnId") String columnId,
+			@RequestParam(required = false, value = "location") String location,
+			@RequestParam(required = false, value = "model") String model,
+			@RequestParam(required = false, value = "brand") String brand,
+			@RequestParam(required = false, value = "name") String name) throws Exception {
 		VelocityContext velocityContext = new VelocityContext();
 		String viewName = "cms/erpProduct-inStop.vm";
 		velocityContext.put("antenna", antenna);
@@ -227,10 +238,13 @@ public class ErpProductController extends BaseController {
 				ErpProduct ep = new ErpProduct();
 				String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 				ep.setId(randomSeed);
-				ep.setName(randomSeed);
+				ep.setName(name);
 				ep.setCode(epcId);
 				ep.setColumnId(columnId);
 				ep.setInDate(new Date());
+				ep.setLocation(location);
+				ep.setModel(model);
+				ep.setBrand(brand);
 				erpProducts.add(ep);
 			}
 			for (ErpProduct p : erpProducts) {
@@ -239,7 +253,7 @@ public class ErpProductController extends BaseController {
 			Reader18.deleteFile(antenna);
 			velocityContext.put("status", antenna + "停止扫描;" + "已录入" + erpProducts.size() + "产品");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
 		}
 		ViewVelocity.view(request, response, viewName, velocityContext);
@@ -262,7 +276,7 @@ public class ErpProductController extends BaseController {
 			Reader18.funcStart(antenna);
 			velocityContext.put("status", antenna + "正在扫描");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			velocityContext.put("status", antenna + "启动扫描异常");
 		}
 		ViewVelocity.view(request, response, viewName, velocityContext);
@@ -286,11 +300,13 @@ public class ErpProductController extends BaseController {
 			// List<String> scanedEpcIds = Reader18.mock("b", antenna);
 			for (String epcId : scanedEpcIds) {
 				erpProductDao.deleteByCode(epcId);
+				ErpCode erpCode = erpCodeDao.getByCode(epcId);
+				erpCodeDao.delete(erpCode);
 			}
 			Reader18.deleteFile(antenna);
 			velocityContext.put("status", antenna + "停止扫描;" + "已撤出" + scanedEpcIds.size() + "产品");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
 		}
 		ViewVelocity.view(request, response, viewName, velocityContext);
@@ -324,7 +340,7 @@ public class ErpProductController extends BaseController {
 			erpProductDao.update(erpProduct);
 			j.setMsg("编辑成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("编辑失败");
 		}
@@ -346,7 +362,7 @@ public class ErpProductController extends BaseController {
 			erpProductDao.delete(erpProduct);
 			j.setMsg("删除成功");
 		} catch (Exception e) {
-			log.info(e.getMessage());
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("删除失败");
 		}
