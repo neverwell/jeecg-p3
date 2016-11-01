@@ -12,16 +12,36 @@
 						<div class="panel-body">
 							<div class="search">
 								<div class="form-group col-sm-3">
-									<label for="name" class="control-label col-sm-3 line34">产品名称</label>
+									<label for="title" class="control-label col-sm-3 line34">产品名称</label>
 									<div class="col-sm-8">
-										<input type="text" name="title" id="title" value="$!{erpProduct.name}" class="form-control" />
+										<input type="text" name="name" id="name" value="$!{erpProduct.name}" class="form-control" />
 									</div>
 								</div>
 								
 								<div class="form-group col-sm-3">
 									<label for="columnId" class="control-label col-sm-3 line34">类别</label>
 									<div class="col-sm-8">
-										<input type="text" name="columnId" id="columnId" value="$!{erpProduct.columnId}" class="form-control" />
+										<input type="text" value="" id="columnId" readonly class="form-control" onclick="showMenu();"/>
+										<input type="hidden" name="columnId" id="pId" />
+									</div>
+								</div>
+								
+								<div class="form-group col-sm-3">
+									<label for="location" class="control-label col-sm-3 line34">产品位置</label>
+									<div class="col-sm-8">
+										<input type="text" name="location" id="location" value="$!{erpProduct.location}" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group col-sm-3">
+									<label for="brand" class="control-label col-sm-3 line34">产品品牌</label>
+									<div class="col-sm-8">
+										<input type="text" name="brand" id="brand" value="$!{erpProduct.brand}" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group col-sm-3">
+									<label for="model" class="control-label col-sm-3 line34">产品型号规格</label>
+									<div class="col-sm-8">
+										<input type="text" name="model" id="model" value="$!{erpProduct.model}" class="form-control" />
 									</div>
 								</div>
 								
@@ -29,23 +49,22 @@
 								<button type="submit" class="btn btn-primary">搜  索</button>
 								<div class="clearfix"></div>
 							</div>
-							
+							<!--
 							<div id="legend">
 								<legend  class="le">
 									<button type="button" class="btn btn-primary" onclick="doUrl('$!{basePath}/p3/cms/erpProduct.do?toAdd')" >新增</button>
 								</legend>
 							</div>
-							
+							-->
 							<table class="table table-striped">
 								<thead>
                                     <th>产品名称</th>
                                     <th>产品编码</th>
                                     <th>产品类别</th>
-                                    <th>产品规格</th>
+                                    <th>型号规格</th>
                                     <th>产品品牌</th>
                                     <th>货架位置</th>
                                     <th>入库时间</th>
-                                    <th>操作</th>
 								</thead>
 								<tbody>
 									#if($!{pageInfos})
@@ -58,9 +77,7 @@
                                                 <td>$!{info.brand}</td>
                                                 <td>$!{info.location}</td>
                                                 <td>$!dateTool.format("yyyy-MM-dd",$!{info.inDate})</td>
-                                                <td class="last">
-													<!--<a href="javascript:doUrl('$!{basePath}/p3/cms/erpProduct.do?toEdit&id=$!{info.id}')" >编辑</a>
-													<a href="javascript:delData('$!{basePath}/p3/cms/erpProduct.do?doDelete&id=$!{info.id}')">删除</a>-->
+												<td class="last">
 													<a href="javascript:doUrl('$!{basePath}/p3/cms/erpProduct.do?toDetail&id=$!{info.id}')">详情</a>
 												</td>
 											</tr>
@@ -81,7 +98,92 @@
 			</form>
 		</div>
 	</div>
-	<script type="text/javascript">
+	<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    	<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="$!{basePath}/plug-in-ui/js/zTree/jquery.ztree.core.js$!{version}"></script>
+<script type="text/javascript" src="$!{basePath}/plug-in-ui/js/zTree/jquery.ztree.excheck.js$!{version}"></script>
+<script type="text/javascript" src="$!{basePath}/plug-in-ui/js/zTree/jquery.ztree.exedit.js$!{version}"></script>
+<script type="text/javascript">
+	var IDMark_A = "_a";
+    
+	function showMenu() {
+		var cityObj = jQuery("#columnId");
+		var cityOffset = jQuery("#columnId").offset();
+    	if(jQuery("#menuContent").is(':hidden')){
+         jQuery("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+    	}else{
+    	  jQuery("#menuContent").fadeOut("fast");
+    	}
+        jQuery("body").bind("mousedown", onBodyDown);
+    }
+    function hideMenu() {
+    	jQuery("#menuContent").fadeOut("fast");
+    	jQuery("body").unbind("mousedown", onBodyDown);
+    }
+    function onBodyDown(event) {
+    	if (!(event.target.id == "columnId" || event.target.id == "menuContent" || jQuery(event.target).parents("#menuContent").length>0)) {
+    		hideMenu();
+    	}
+    }
+	
+	var setting = {
+		check: {
+			enable: true,
+			chkStyle: "radio",
+			radioType: "all"
+		},
+		view: {
+			addHoverDom: addHoverDom,
+			removeHoverDom: removeHoverDom,
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true,
+				idKey: "id",
+				pIdKey: "parentCode",
+				rootPId: null
+			}
+		},
+		callback: {
+			onClick: onClick,
+			onCheck: onCheck
+		}
+	};
+    function onClick(e, treeId, treeNode) {
+       var tree = zTree.getZTreeObj("treeDemo");
+    	tree.checkNode(treeNode, !treeNode.checked, null, true);
+    	return false;
+    }
+    function onCheck(e, treeId, treeNode) {
+    	var tree = zTree.getZTreeObj("treeDemo"),
+    	nodes = tree.getCheckedNodes(true),
+    	v = "",vid = "";
+    	for (var i=0, l=nodes.length; i<l; i++) {
+    		v += nodes[i].name + ",";
+    		vid += nodes[i].id + ",";
+    	}
+    	if (v.length > 0 ) v = v.substring(0, v.length-1);
+    	if (vid.length > 0 ) vid = vid.substring(0, vid.length-1);
+    	jQuery("#columnId").val(v);
+		$("#pId").val(vid);
+    }
+    function addHoverDom(treeId, treeNode) {
+    	if (treeNode.parentNode && treeNode.parentNode.id!=1) return;
+    	var aObj = jQuery("#" + treeNode.tId + IDMark_A);
+    		if (jQuery("#diyBtn_"+treeNode.id).length>0) return;
+    		var editStr = "<span id='diyBtn_" +treeNode.id+ "'>编码:"+treeNode.id+"</span>";
+    		aObj.after(editStr);
+    }
+    function removeHoverDom(treeId, treeNode) {
+    		jQuery("#diyBtn_"+treeNode.id).unbind().remove();
+    		jQuery("#diyBtn_space_" +treeNode.id).unbind().remove();
+    }
+	
+    var zNodes;
         jQuery(document).ready(function(){
         	jQuery.ajax({  
     	        async : false,  
@@ -99,6 +201,20 @@
     	        }
     	    });  
         });
+         jQuery(document).ready(function(){
+    	jQuery.ajax({  
+	        async : false,  
+	        cache:false,  
+	        type: 'POST',  
+	        dataType : "json",  
+	        url: '$!{basePath}/p3/cms/erpCategory.do?tree',//请求的action路径  
+	        error: function () {//请求失败处理函数  
+	            alert('请求失败');  
+	        },  
+	        success:function(data){ //请求成功后处理函数。    
+	            zNodes = data;   //把后台封装好的简单Json格式赋给zNodes  
+	        }  
+	    });  
+    	zTree.init(jQuery("#treeDemo"), setting, zNodes);
+    });
     </script>
-</body>
-</html>

@@ -22,7 +22,7 @@
 						</div>
 						
 						<div class="form-group mno">
-							<label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">产品类型</label>
+							<label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">产品类别</label>
 							<div class="col-sm-8">
 								<input type="text" value="$!{erpProduct.columnId}" id="columnId" readonly class="form-control" readonly"/>
 							</div>
@@ -37,7 +37,25 @@
 							</div>
 						</div>
 						
+						<div class="form-group mno">
+							<label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">产品品牌</label>
+							<div class="col-sm-8">
+								<input type="text" value="$!{erpProduct.brand}" name="brand" id="author" class="form-control" readonly/>
+							</div>
+						</div>
+						<div class="form-group mno">
+							<label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">入库时间</label>
+							<div class="col-sm-8">
+								<input type="text" value="$!dateTool.format("yyyy-MM-dd",$!{erpProduct.inDate})" name="inDate" id="author" class="form-control" readonly/>
+							</div>
+						</div>
 						
+						<div class="form-group mno">
+							<label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">型号规格</label>
+							<div class="col-sm-8">
+								<input type="text" value="$!{erpProduct.model}" name="model" id="author" class="form-control" readonly/>
+							</div>
+						</div>
 						
                         <div class="form-group mno">
 							<div class="col-sm-offset-1 col-sm-6">
