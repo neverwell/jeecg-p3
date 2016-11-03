@@ -19,8 +19,12 @@
             </div>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
             </button>
-            <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+           
+           
+           
+          <div class="btn-group roll-nav roll-right">
+          <button class="J_tabCloseAll" data-toggle="dropdown">关闭全部
+              <!--    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
 
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
@@ -31,7 +35,7 @@
                     </li>
                     <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
                     </li>
-                </ul>
+                </ul>-->
             </div>
         </nav></div>
     <div class="row J_mainContent" id="content-main">

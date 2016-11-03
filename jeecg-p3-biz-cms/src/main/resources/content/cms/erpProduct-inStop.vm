@@ -19,12 +19,20 @@
 							<div class="col-sm-8">
 								<span>$!{status}</span>
 							</div>
+							#if($!strs.size() gt 0)
+							<div class="col-sm-8">
+							<span>以下编码尚未入库，产品入库失败：</span></br>
+								#foreach($!{str} in $!{strs})
+                                        <span>$!{str}</span></br>
+								#end
+							</div>
+							#end
 						</div>
-                        <div id="form-group mno">
+                       <!-- <div id="form-group mno">
 							<legend  class="col-sm-offset-1 col-sm-6">
-								<button type="button" class="btn btn-primary" onclick="doUrl('$!{basePath}/system/back.do?home')" >返回首页</button>
+								<button type="button" class="btn btn-primary closee"  >返回首页</button>
 							</legend>
-						</div>
+						</div> -->
 					</form>
 				</div>
 			</div>
@@ -135,6 +143,20 @@
 	        }  
 	    });  
     	alert(zNodes);
+    });
+    
+    
+    
+    $('.closee').on('click', function () {
+        $('.page-tabs-content').children("[data-id]").not(":first").each(function () {
+            $('.J_iframe[data-id="' + $(this).data('id') + '"]').remove();
+            $(this).remove();
+        });
+        $('.page-tabs-content').children("[data-id]:first").each(function () {
+            $('.J_iframe[data-id="' + $(this).data('id') + '"]').show();
+            $(this).addClass("active");
+        });
+        $('.page-tabs-content').css("margin-left", "0");
     });
 </script>
 

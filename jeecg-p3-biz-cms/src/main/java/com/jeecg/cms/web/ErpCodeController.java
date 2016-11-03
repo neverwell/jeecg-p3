@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.RepaintManager;
 
 import org.apache.velocity.VelocityContext;
 import org.jeecgframework.minidao.pojo.MiniDaoPage;
@@ -91,14 +92,29 @@ public class ErpCodeController extends BaseController {
 	@ResponseBody
 	public AjaxJson doAdd(@ModelAttribute ErpCode erpCode) {
 		AjaxJson j = new AjaxJson();
+		String code = erpCode.getCode();
+		String oneCode = erpCode.getOneCode();
 		try {
-			erpCodeDao.insert(erpCode);
-			j.setMsg("保存成功");
+			ErpCode ec = erpCodeDao.getByCode(code);
+			if (null == ec) {
+				ec = erpCodeDao.getByOneCode(oneCode);
+				if (null == ec) {
+					erpCodeDao.insert(erpCode);
+					j.setMsg("保存成功");
+				} else {
+					j.setSuccess(false);
+					j.setMsg("保存失败，一维码已存在");
+				}
+			} else {
+				j.setSuccess(false);
+				j.setMsg("保存失败，编码已存在");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("保存失败");
 		}
+
 		return j;
 	}
 

@@ -38,7 +38,6 @@ public class ErpProductController extends BaseController {
 	@Autowired
 	private ErpCodeDao erpCodeDao;
 
-
 	/**
 	 * 列表页面
 	 * 
@@ -47,7 +46,7 @@ public class ErpProductController extends BaseController {
 	@RequestMapping(params = "list", method = { RequestMethod.GET, RequestMethod.POST })
 	public void list(@ModelAttribute ErpProduct query, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = false, value = "pageNo", defaultValue = "1") int pageNo,
-			@RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize)  {
+			@RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize) {
 		try {
 			LOG.info(request, " back list");
 			// 分页数据
@@ -234,27 +233,35 @@ public class ErpProductController extends BaseController {
 			List<ErpProduct> erpProducts = new ArrayList<ErpProduct>();
 			List<String> scanedEpcIds = Reader18.funcStop(antenna);
 			// List<String> scanedEpcIds = Reader18.mock("b", antenna);
+			List<String> strs = new ArrayList<String>();
 			for (String epcId : scanedEpcIds) {
-				ErpProduct ep = new ErpProduct();
-				String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-				ep.setId(randomSeed);
-				ep.setName(name);
-				ep.setCode(epcId);
-				ep.setColumnId(columnId);
-				ep.setInDate(new Date());
-				ep.setLocation(location);
-				ep.setModel(model);
-				ep.setBrand(brand);
-				erpProducts.add(ep);
+				ErpCode ec = erpCodeDao.getByCode(epcId);
+				if (null == ec) {// 编码不在关联表内
+					strs.add(epcId);
+				} else {
+					ErpProduct ep = new ErpProduct();
+					String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+					ep.setId(randomSeed);
+					ep.setName(name);
+					ep.setCode(epcId);
+					ep.setColumnId(columnId);
+					ep.setInDate(new Date());
+					ep.setLocation(location);
+					ep.setModel(model);
+					ep.setBrand(brand);
+					erpProducts.add(ep);
+				}
 			}
 			for (ErpProduct p : erpProducts) {
 				erpProductDao.insert(p);
 			}
-			Reader18.deleteFile(antenna);
 			velocityContext.put("status", antenna + "停止扫描;" + "已录入" + erpProducts.size() + "产品");
+			velocityContext.put("strs", strs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
+		} finally {
+			Reader18.deleteFile(antenna);
 		}
 		ViewVelocity.view(request, response, viewName, velocityContext);
 	}
@@ -303,11 +310,12 @@ public class ErpProductController extends BaseController {
 				ErpCode erpCode = erpCodeDao.getByCode(epcId);
 				erpCodeDao.delete(erpCode);
 			}
-			Reader18.deleteFile(antenna);
 			velocityContext.put("status", antenna + "停止扫描;" + "已撤出" + scanedEpcIds.size() + "产品");
 		} catch (Exception e) {
 			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
+		} finally {
+			Reader18.deleteFile(antenna);
 		}
 		ViewVelocity.view(request, response, viewName, velocityContext);
 	}

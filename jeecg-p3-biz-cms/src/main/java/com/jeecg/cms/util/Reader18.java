@@ -447,6 +447,7 @@ public class Reader18 {
 		String location = pro.getProperty("working_dir");
 		File scaned = new File(location + "result" + File.separatorChar + "scaned_" + antenna + ".txt");
 		if (scaned.isFile() && scaned.exists()) {
+//			System.out.println("delete" + scaned.getAbsolutePath());
 			scaned.delete();
 		}
 	}

@@ -202,7 +202,7 @@ public class ErpProductAPI extends BaseController {
 			result.put("summary", "此一维码尚未入库");
 			result.put("data", null);
 		} else {
-			erpProductDao.deleteByCode(erpCode.getCode());
+			// erpProductDao.deleteByCode(erpCode.getCode());出库不删除编码关系
 			erpCodeDao.delete(erpCode);
 			result.put("status", true);
 			result.put("summary", "出库成功");
