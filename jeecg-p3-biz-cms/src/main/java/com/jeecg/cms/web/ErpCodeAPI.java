@@ -1,5 +1,6 @@
 package com.jeecg.cms.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,11 +137,23 @@ public class ErpCodeAPI extends BaseController {
 	@RequestMapping(value = "/add", method = { RequestMethod.POST }, headers = "Accept=application/json")
 	@ResponseBody
 	public Map<String, Object> add(@RequestBody List<ErpCode> erpCodes) {
+		List<String> strs = new ArrayList<String>();
 		for (ErpCode ec : erpCodes) {
-			erpCodeDao.insert(ec);
+			ErpCode temp = erpCodeDao.getByCode(ec.getCode());
+			if (null == temp) {
+				temp = erpCodeDao.getByOneCode(ec.getOneCode());
+				if (null == temp) {
+					erpCodeDao.insert(ec);
+					result.put("status", true);
+				} else {
+					strs.add(ec.getCode());
+				}
+			} else {
+				strs.add(ec.getCode());
+			}
 		}
-		result.put("status", true);
-		result.put("summary", "添加成功");
+		result.put("summary", "成功添加"+(erpCodes.size()-strs.size())+"组编码");
+		result.put("strs", strs);
 		result.put("data", null);
 		return result;
 	}

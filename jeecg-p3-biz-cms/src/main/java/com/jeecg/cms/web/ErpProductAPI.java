@@ -1,7 +1,7 @@
 package com.jeecg.cms.web;
 
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -157,6 +157,7 @@ public class ErpProductAPI extends BaseController {
 			String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 			erpProduct.setId(randomSeed);
 			erpProduct.setCode(erpCode.getCode());
+			erpProduct.setInDate(new Date());
 			erpProductDao.insert(erpProduct);
 			result.put("status", true);
 			result.put("summary", "入库成功");

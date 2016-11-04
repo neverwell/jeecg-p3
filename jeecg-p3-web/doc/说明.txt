@@ -39,8 +39,8 @@ return：{"summary":"","status":true,"data":{"results":[{"oneCode":"2421312321",
 
 添加
 POST http://localhost:8080/jeecg-p3-web/api/erpCode/add
-例：http://localhost:8080/jeecg-p3-web/api/erpCode/add [{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"}]
-return: {"summary":"添加成功","status":true,"data":null}
+例：http://localhost:8080/jeecg-p3-web/api/erpCode/add [{"oneCode":"aaa","code":"aaa"},{"oneCode":"bbb","code":"bbb"},{"oneCode":"ccc","code":"ccc"},{"oneCode":"121","code":"21"},{"oneCode":"121","code":"21"}]
+return: {"summary":"成功添加3组编码","status":true,"strs":["21","21"],"data":null}
 
 编辑
 POST http://localhost:8080/jeecg-p3-web/api/erpCode/edit
