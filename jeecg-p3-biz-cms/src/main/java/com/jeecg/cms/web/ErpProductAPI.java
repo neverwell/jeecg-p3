@@ -149,11 +149,15 @@ public class ErpProductAPI extends BaseController {
 	@ResponseBody
 	public Map<String, Object> in(@RequestBody ErpProduct erpProduct) {
 		ErpCode erpCode = erpCodeDao.getByOneCode(erpProduct.getOneCode());
+
 		if (null == erpCode || (erpCode.getCode() == null || erpCode.getCode().length() <= 0)) {
 			result.put("status", false);
 			result.put("summary", "此一维码尚未入库");
 			result.put("data", null);
-		} else {
+			return result;
+		}
+		ErpProduct temp = erpProductDao.getByCode(erpCode.getCode());
+		if (null == temp) {
 			String randomSeed = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 			erpProduct.setId(randomSeed);
 			erpProduct.setCode(erpCode.getCode());
@@ -161,6 +165,10 @@ public class ErpProductAPI extends BaseController {
 			erpProductDao.insert(erpProduct);
 			result.put("status", true);
 			result.put("summary", "入库成功");
+			result.put("data", null);
+		} else {
+			result.put("status", false);
+			result.put("summary", "入库失败，该编码的产品已在库中");
 			result.put("data", null);
 		}
 		return result;
@@ -203,8 +211,8 @@ public class ErpProductAPI extends BaseController {
 			result.put("summary", "此一维码尚未入库");
 			result.put("data", null);
 		} else {
-			// erpProductDao.deleteByCode(erpCode.getCode());出库不删除编码关系
-			erpCodeDao.delete(erpCode);
+			erpProductDao.deleteByCode(erpCode.getCode());
+			// erpCodeDao.delete(erpCode);出库不删除编码关系
 			result.put("status", true);
 			result.put("summary", "出库成功");
 			result.put("data", null);
