@@ -6,13 +6,13 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="$!{basePath}/plug-in-ui/hplus/img/profile_small.jpg"></span>
+                       <!-- <span><img alt="image" class="img-circle" src="$!{basePath}/plug-in-ui/hplus/img/profile_small.jpg"></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                    <span class="block m-t-xs"><strong class="font-bold">$createBy</strong></span>
                                 <span class="text-muted text-xs block">管理员<b class="caret"></b></span>
                                 </span>
-                        </a>
+                        </a>-->
                     </div>
                     <div class="logo-element" style="font-size: 15px;">CMS系统</div>
                 </li>
