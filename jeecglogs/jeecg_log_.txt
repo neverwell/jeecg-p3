@@ -1,0 +1,28 @@
+[INFO][2016-11-14 09:41:21,250][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.dao.TSOperationDao }
+[INFO][2016-11-14 09:41:21,252][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.mutiLang.dao.P3MutiLangDao }
+[INFO][2016-11-14 09:41:21,254][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.tag.select.dict.dao.TSTypeDao }
+[INFO][2016-11-14 09:41:21,255][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.tag.select.table.dao.CustomTableDao }
+[INFO][2016-11-14 09:41:21,255][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsAdDao }
+[INFO][2016-11-14 09:41:21,256][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsArticleDao }
+[INFO][2016-11-14 09:41:21,257][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsMenuDao }
+[INFO][2016-11-14 09:41:21,257][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsSiteDao }
+[INFO][2016-11-14 09:41:21,258][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsStyleDao }
+[INFO][2016-11-14 09:41:21,258][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.ErpCategoryDao }
+[INFO][2016-11-14 09:41:21,259][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.ErpCodeDao }
+[INFO][2016-11-14 09:41:21,259][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.ErpProductDao }
+[ERROR][2016-11-14 09:41:21,602][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[INFO][2016-11-14 09:41:21,695][com.alibaba.druid.pool.DruidDataSource]{dataSource-1} inited
+[INFO][2016-11-14 09:41:35,454][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.dao.TSOperationDao }
+[INFO][2016-11-14 09:41:35,455][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.mutiLang.dao.P3MutiLangDao }
+[INFO][2016-11-14 09:41:35,456][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.tag.select.dict.dao.TSTypeDao }
+[INFO][2016-11-14 09:41:35,456][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.core.biz.tag.select.table.dao.CustomTableDao }
+[INFO][2016-11-14 09:41:35,457][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsAdDao }
+[INFO][2016-11-14 09:41:35,458][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsArticleDao }
+[INFO][2016-11-14 09:41:35,458][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsMenuDao }
+[INFO][2016-11-14 09:41:35,459][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsSiteDao }
+[INFO][2016-11-14 09:41:35,460][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.CmsStyleDao }
+[INFO][2016-11-14 09:41:35,460][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.ErpCategoryDao }
+[INFO][2016-11-14 09:41:35,461][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.ErpCodeDao }
+[INFO][2016-11-14 09:41:35,462][org.jeecgframework.minidao.aop.MiniDaoHandler]register minidao name is { com.jeecg.cms.dao.ErpProductDao }
+[ERROR][2016-11-14 09:41:35,778][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[INFO][2016-11-14 09:41:35,851][com.alibaba.druid.pool.DruidDataSource]{dataSource-1} inited

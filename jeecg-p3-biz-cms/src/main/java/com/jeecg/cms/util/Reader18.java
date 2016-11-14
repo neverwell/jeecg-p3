@@ -272,7 +272,11 @@ public class Reader18 {
 	public static void funcStart(String antenna) throws Exception {
 		List<String> pcIds = new ArrayList<String>();
 		Properties pro = new Properties();
-		String path = Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20", " ");
+
+		// String path =
+		// Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20",
+		// " ");
+		String path = "C:\\rfid\\uhf_v1.0\\";
 		File f = new File(path + "config.properties");
 
 		System.out.println(f.getPath());
@@ -447,7 +451,7 @@ public class Reader18 {
 		String location = pro.getProperty("working_dir");
 		File scaned = new File(location + "result" + File.separatorChar + "scaned_" + antenna + ".txt");
 		if (scaned.isFile() && scaned.exists()) {
-//			System.out.println("delete" + scaned.getAbsolutePath());
+			// System.out.println("delete" + scaned.getAbsolutePath());
 			scaned.delete();
 		}
 	}
