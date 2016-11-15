@@ -3,3 +3,5 @@
 .classpath
 .settings
 .metadata
+pom.xml
+/catalina.base_IS_UNDEFINED/

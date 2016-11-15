@@ -261,8 +261,10 @@ public class ErpProductController extends BaseController {
 			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
 		} finally {
+			// System.out.println("delete");
 			Reader18.deleteFile(antenna);
 		}
+		// System.out.println("response");
 		ViewVelocity.view(request, response, viewName, velocityContext);
 	}
 

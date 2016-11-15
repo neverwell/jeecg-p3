@@ -1,0 +1,4 @@
+2016-11-14 20:57:08.884 [net.sf.ehcache.CacheManager@1fad846] INFO  UpdateChecker - New update(s) found: 2.4.7 [http://www.terracotta.org/confluence/display/release/Release+Notes+Ehcache+Core+2.4]. Please check http://ehcache.org for the latest version.
+2016-11-14 20:58:07.691 [qtp28302850-22] INFO  BaseController - [0:0:0:0:0:0:0:1]  back home
+2016-11-14 20:58:09.554 [qtp28302850-23] INFO  BaseController - [0:0:0:0:0:0:0:1]  out page
+2016-11-14 20:58:17.882 [qtp28302850-23] INFO  BaseController - [0:0:0:0:0:0:0:1]  inout page

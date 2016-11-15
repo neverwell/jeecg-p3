@@ -230,7 +230,8 @@ public class Reader18 {
 				writer.write(_epcId + "\n");
 			}
 			writer.close();
-			System.out.println("stop scan...don't forget delete'scaned_xx.txt' after store to db!");
+			// System.out.println("stop scan...don't forget
+			// delete'scaned_xx.txt' after store to db!");
 		}
 	}
 
@@ -298,7 +299,10 @@ public class Reader18 {
 	public static List<String> funcStop(String antenna) throws Exception {
 		List<String> pcIds = new ArrayList<String>();
 		Properties pro = new Properties();
-		String path = Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20", " ");
+		// String path =
+		// Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20",
+		// " ");
+		String path = "C:\\rfid\\uhf_v1.0\\";
 		File f = new File(path + "config.properties");
 
 		FileInputStream in = new FileInputStream(f);
@@ -345,7 +349,8 @@ public class Reader18 {
 			writer.write(_epcId + "\n");
 		}
 		writer.close();
-		System.out.println("stop scan...don't forget delete'scaned_xx.txt' after store to db!");
+		// System.out.println("stop scan...don't forget delete'scaned_xx.txt'
+		// after store to db!");
 
 		return scanedEpcIds;
 
@@ -440,7 +445,10 @@ public class Reader18 {
 
 	public static void deleteFile(String antenna) throws IOException {
 		Properties pro = new Properties();
-		String path = Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20", " ");
+		// String path =
+		// Reader18.class.getClassLoader().getResource("/").getPath().replaceAll("%20",
+		// " ");
+		String path = "C:\\rfid\\uhf_v1.0\\";
 		File f = new File(path + "config.properties");
 
 		FileInputStream in = new FileInputStream(f);
@@ -472,7 +480,8 @@ public class Reader18 {
 			writer.write(_epcId + "\n");
 		}
 		writer.close();
-		System.out.println("stop scan...don't forget delete'scaned_xx.txt' after store to db!");
+		// System.out.println("stop scan...don't forget delete'scaned_xx.txt'
+		// after store to db!");
 		List<String> scanedEpcIds = new ArrayList<String>();
 		FileReader fr = new FileReader(scaned);
 		BufferedReader br = new BufferedReader(fr);
