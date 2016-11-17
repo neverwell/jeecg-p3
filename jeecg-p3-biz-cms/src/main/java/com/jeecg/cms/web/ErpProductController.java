@@ -299,20 +299,21 @@ public class ErpProductController extends BaseController {
 	 */
 	@RequestMapping(params = "toOutStop", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public void toutStop(HttpServletRequest request, HttpServletResponse response,
+	public void toOutStop(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = true, value = "antenna") String antenna) throws Exception {
 		VelocityContext velocityContext = new VelocityContext();
 		String viewName = "cms/erpProduct-outStop.vm";
 		velocityContext.put("antenna", antenna);
 		try {
 			List<String> scanedEpcIds = Reader18.funcStop(antenna);
+			// List<String> resultEpcIds =new ArrayList<String>(0);
 			// List<String> scanedEpcIds = Reader18.mock("b", antenna);
 			for (String epcId : scanedEpcIds) {
 				erpProductDao.deleteByCode(epcId);
-				ErpCode erpCode = erpCodeDao.getByCode(epcId);
-				erpCodeDao.delete(erpCode);
+				// ErpCode erpCode = erpCodeDao.getByCode(epcId);
+				// erpCodeDao.delete(erpCode);
 			}
-			velocityContext.put("status", antenna + "停止扫描;" + "已撤出" + scanedEpcIds.size() + "产品");
+			velocityContext.put("status", antenna + "停止扫描;" + "已出库" + scanedEpcIds.size() + "产品");
 		} catch (Exception e) {
 			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
