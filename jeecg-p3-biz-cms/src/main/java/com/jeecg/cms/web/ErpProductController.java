@@ -306,14 +306,18 @@ public class ErpProductController extends BaseController {
 		velocityContext.put("antenna", antenna);
 		try {
 			List<String> scanedEpcIds = Reader18.funcStop(antenna);
-			// List<String> resultEpcIds =new ArrayList<String>(0);
+			List<String> resultEpcIds = new ArrayList<String>(0);
 			// List<String> scanedEpcIds = Reader18.mock("b", antenna);
 			for (String epcId : scanedEpcIds) {
-				erpProductDao.deleteByCode(epcId);
+				ErpProduct temp = erpProductDao.getByCode(epcId);
+				if (null != temp) {
+					erpProductDao.deleteByCode(epcId);
+					resultEpcIds.add(epcId);
+				}
 				// ErpCode erpCode = erpCodeDao.getByCode(epcId);
 				// erpCodeDao.delete(erpCode);
 			}
-			velocityContext.put("status", antenna + "停止扫描;" + "已出库" + scanedEpcIds.size() + "产品");
+			velocityContext.put("status", antenna + "停止扫描;" + "已出库" + resultEpcIds.size() + "产品");
 		} catch (Exception e) {
 			e.printStackTrace();
 			velocityContext.put("status", antenna + "停止扫描异常");
